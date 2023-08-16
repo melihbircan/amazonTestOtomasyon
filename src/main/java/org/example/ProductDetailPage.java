@@ -2,28 +2,40 @@ package org.example;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class ProductDetailPage {
     private WebDriver driver;
+
+    @FindBy(id = "productTitle")
+    WebElement productTitle;
+    @FindBy(id = "priceblock_ourprice")
+    WebElement productPrice;
+    @FindBy(xpath = "//th[text()='İşlemci']/following-sibling::td")
+    WebElement cpuModel;
+    @FindBy(id = "add-to-cart-button")
+    WebElement addCartButton;
+
 
     public ProductDetailPage(WebDriver driver) {
         this.driver = driver;
     }
 
     public String getProductName() {
-        return driver.findElement(By.id("productTitle")).getText();
+        return productTitle.getText();
     }
 
     public String getProductPrice() {
-        return driver.findElement(By.id("priceblock_ourprice")).getText();
+        return productPrice.getText();
     }
 
     public String getProductCpuModel() {
-        return driver.findElement(By.xpath("//th[text()='İşlemci']/following-sibling::td")).getText();
+        return cpuModel.getText();
     }
 
     public void addToCart() {
-        driver.findElement(By.id("add-to-cart-button")).click();
+        addCartButton.click();
     }
 }
 
